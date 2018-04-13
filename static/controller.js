@@ -8,6 +8,7 @@ fetch('/randomtextme/api/generate')
   let gibberish_div = document.querySelector('#article_body');
   for (let paragraph of gibberish.text_out) {
     let p = document.createElement('p');
+    p.style.fontFamily = "'News Cycle', sans-serif";
     p.innerHTML = paragraph;
     p.className = "card-body";
     gibberish_div.appendChild(p);
