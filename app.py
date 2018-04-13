@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, request, jsonify
 import requests
 import json
+import random
 
 app = Flask(__name__)
 
@@ -11,7 +12,8 @@ def index():
 
 @app.route('/randomtextme/api/generate')
 def generate_gibberish():
-    resp = requests.get('http://randomtext.me/api/gibberish/p-5/25-45')
+    nump = random.randrange(5,10)
+    resp = requests.get('http://randomtext.me/api/gibberish/p-{0}/25-45'.format(nump))
     data = resp.json()
     text_lst = data['text_out'].split('\r')
     reformated_resp = {}
@@ -45,6 +47,14 @@ def generate_quote():
 def generate_trump():
     resp = requests.get('https://api.whatdoestrumpthink.com/api/v1/quotes/random')
     data = resp.json()
+    message = data['message']
+    reformated_resp = {'message': message}
+    return jsonify(reformated_resp)
+
+@app.route('/dogs/api/generate')
+def generate_dog():
+    resp = requests.get('https://dog.ceo/api/breeds/image/random')
+    data = resp.json();
     message = data['message']
     reformated_resp = {'message': message}
     return jsonify(reformated_resp)

@@ -4,11 +4,12 @@ fetch('/randomtextme/api/generate')
 })
 .then(function(myjson){
   let gibberish = myjson;
-  let randomtextsec =  document.querySelector('#randomtext');
-  let gibberish_div = document.createElement('div');
+  let randomtextsec =  document.querySelector('#article');
+  let gibberish_div = document.querySelector('#article_body');
   for (let paragraph of gibberish.text_out) {
     let p = document.createElement('p');
     p.innerHTML = paragraph;
+    p.className = "card-body";
     gibberish_div.appendChild(p);
   }
   randomtextsec.appendChild(gibberish_div);
@@ -24,7 +25,7 @@ fetch('/quotesondesign/api/generate')
 })
 .then(function(myjson){
   let quote = myjson;
-  let randomtextsec = document.querySelector('#randomtext');
+  let randomtextsec = document.querySelector('#article');
   let blockquote = document.createElement('blockquote');
   let footer = document.createElement('footer');
   footer.className = "blockquote-footer";
@@ -64,4 +65,41 @@ fetch('/randomtextme/api/headline')
   let headline = myjson;
   let randomtextheading = document.querySelector('#randomtextheading');
   randomtextheading.innerHTML = headline.text_out;
+})
+
+fetch('/dogs/api/generate')
+.then(function(response){
+  return response.json();
+})
+.then(function(myjson){
+  let dog = myjson;
+  let img_1 = document.querySelector('#img_1');
+  img_1.src = dog.message;
+})
+.catch(function(err){
+  console.log(err);
+})
+fetch('/dogs/api/generate')
+.then(function(response){
+  return response.json();
+})
+.then(function(myjson){
+  let dog = myjson;
+  let img_2 = document.querySelector('#img_2');
+  img_2.src = dog.message;
+})
+.catch(function(err){
+  console.log(err);
+})
+fetch('/dogs/api/generate')
+.then(function(response){
+  return response.json();
+})
+.then(function(myjson){
+  let dog = myjson;
+  let img_3 = document.querySelector('#img_3');
+  img_3.src = dog.message;
+})
+.catch(function(err){
+  console.log(err);
 })
